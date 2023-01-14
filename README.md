@@ -49,6 +49,9 @@ To extract meaning from the co-occurence matrix, the authors use the ratio of pr
 
 Here is the classic example explaining the idea. Given two main words $i=ice$ and $j=steam$ and a third one $k$, we obtained the following statistics from a co-occurence matrix:
 
+<p align="center">
+<img width="400" alt="Screenshot 2023-01-14 at 17 03 48" src="https://user-images.githubusercontent.com/107317997/212481630-fbc83b4b-9cc1-4174-b014-9bb5a65cee78.png">
+</p>
 
 Word closer to $i=ice$ has a ratio much greater than 1 and word closer to $j=steam$ has a ratio much lower than 1. Words that are related or unrelated to both $i$ and $j$ should have a ratio around 1.
 
