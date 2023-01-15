@@ -21,7 +21,7 @@ The matrix of word-word co-occurrence tabulates the number of times word A occur
 
 In the original paper, a decreasing weighting function is used so that word pairs that are d words apart contribute 1/d to the total count. The window size and the decision of whether distinguishing left context from right context should also be made before constructing the co-occurrence matrix. The context window size used in the paper is 10.
 
-(Example) Consider the sentence: “Your model is only as good as your data”. The co-occurence matrix with context window 2 without distinction of left and right context is:
+Consider the sentence: “Your model is only as good as your data”. The co-occurence matrix with context window 2 without distinction of left and right context is:
 
 
 
@@ -66,8 +66,9 @@ $$J=\sum_{i,j=1}^{V}f(X_{ij})(w_i^T\hat{w_j}+b_i+\hat{b_j}-log(X_{ij}))^2$$
 
 Weight function is introduced to avoid weighing all co-occurence equally. 
 
-$$f(x)=1_{x<x_{max}}(x)(x/x_{max})^\alpha+1_{x>=x_{max}}(x)$$
-
+<p align="center">
+<img width="250" alt="Screenshot 2023-01-14 at 17 22 09" src="https://user-images.githubusercontent.com/107317997/212483003-885f485a-c5cc-4202-9628-ccd715abe13e.png">
+</p>
 
 In the paper, $x_{max}$ is fixed to 100 and alpha to 3/4.
 The result is a function like this:
