@@ -1,4 +1,4 @@
-# A python implementation of GloVe
+# A python implementation of GloVe (in progress 70%)
 
 In this project, I will try to build a toy model in Python according to the original GloVe paper. The main purpose is to help understand throughly the mechanism of the algorithme and implement the model in a smaller scale dataset to analyse its performance.
  
