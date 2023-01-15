@@ -21,9 +21,14 @@ The matrix of word-word co-occurrence tabulates the number of times word A occur
 
 In the original paper, a decreasing weighting function is used so that word pairs that are d words apart contribute 1/d to the total count. The window size and the decision of whether distinguishing left context from right context should also be made before constructing the co-occurrence matrix. The context window size used in the paper is 10.
 
-Consider the sentence: “Your model is only as good as your data”. The co-occurence matrix with context window 2 without distinction of left and right context is:
+Consider the sentence: 
+> *Your model is only as good as your data.*
 
+The co-occurence matrix with context window 2 without distinction of left and right context is:
 
+<p align="center">
+<img width="500" alt="Screenshot 2023-01-15 at 11 06 54" src="https://user-images.githubusercontent.com/107317997/212534852-b47a147d-90cd-4751-936e-4b439df29fbc.png">
+</p>
 
 2. 2 **Notations**
 
@@ -33,7 +38,7 @@ Let the matrix of word-word co-occurence counts be denoted by $X$, with $X_{ij}$
 
 Each word $i$ of the vocabulary is associated with two weight vectors $w_i, \hat{w}_i$ of dimension D, and two biais $b_i, \hat{b}_i$ of length 1. 
 
-The final embedding of the word $i$ is the sum of $w_i$ and $\hat{w}_i$. 
+The final embedding of the word $i$ is the sum of $w_i$ and $\hat{w}_i$. The authors used word vectors of 100 dimensions on 1.5 billion words corpus. 
 
 
 
@@ -48,7 +53,7 @@ To extract meaning from the co-occurence matrix, the authors use the ratio of pr
 Here is the classic example explaining the idea. Given two main words $i=ice$ and $j=steam$ and a third one $k$, we obtained the following statistics from a co-occurence matrix:
 
 <p align="center">
-<img width="400" alt="Screenshot 2023-01-14 at 17 03 48" src="https://user-images.githubusercontent.com/107317997/212481630-fbc83b4b-9cc1-4174-b014-9bb5a65cee78.png">
+<img width="480" alt="Screenshot 2023-01-14 at 17 03 48" src="https://user-images.githubusercontent.com/107317997/212481630-fbc83b4b-9cc1-4174-b014-9bb5a65cee78.png">
 </p>
 
 Word closer to $i=ice$ has a ratio much greater than 1 and word closer to $j=steam$ has a ratio much lower than 1. Words that are related or unrelated to both $i$ and $j$ should have a ratio around 1.
@@ -61,6 +66,7 @@ By imposing conditions to the function and the word vectors, we could obtain a r
 
 $$J=\sum_{i,j=1}^{V}f(X_{ij})(w_i^T\hat{w_j}+b_i+\hat{b_j}-log(X_{ij}))^2$$
 
+Where $f(x)$ represents the weight function.
 
 2. 4 **Weight function**
 
@@ -79,8 +85,10 @@ The result is a function like this:
 
 2. 5 **Gradients**
 
-The value of loss function is based on four variables: W1, W2, B1, B2. The gradient pf the loss function contains the derivatives of J based of each variable 
-￼
+The value of loss function is based on four variables: $w, \hat{w}, b, \hat{b}$. The gradient of the loss function contains the derivatives of $J$ based of each variable.
+
 $$\frac{\partial J}{\partial w_i}=\sum_{j=1}^{V}2f(X_{ij})(w_i^T\hat{w_j}+b_i+\hat{b_j}-log(X_{ij}))\hat{w_j}$$
 
-$$\frac{\partial J}{\partial b_i}=\sum_{j=1}^{V}2f(X_{ij})(w_i^T\hat{w_j}+b_i+\hat{b_j}-log(X_{ij}))$$
+$$\frac{\partial J}{\partial b_i}=\sum_{j=1}^{V}2f(X_{ij})(w_i^T\hat{w_j}+b_i+\hat{b_j}-log(X_{ij}))$$ 
+
+In the experiments of the paper, AdaGrad was used to train the model, with an initial learning rate of 0.05 and 50 iterations.
